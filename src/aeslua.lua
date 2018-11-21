@@ -34,11 +34,6 @@ function private.pwToKey(password, keyLength)
         password = string.sub(password, 1, padLength);
     end
     
-    local pwBytes = {string.byte(password,1,#password)};
-    password = ciphermode.encryptString(pwBytes, password, ciphermode.encryptCBC);
-    
-    password = string.sub(password, 1, keyLength);
-   
     return {string.byte(password,1,#password)};
 end
 
@@ -53,7 +48,7 @@ end
 --
 function public.encrypt(password, data, keyLength, mode)
 	assert(password ~= nil, "Empty password.");
-	assert(password ~= nil, "Empty data.");
+	assert(data ~= nil, "Empty data.");
 	 
     local mode = mode or public.CBCMODE;
     local keyLength = keyLength or public.AES128;
